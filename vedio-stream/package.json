@@ -1,0 +1,12 @@
+{
+  "name": "vedio-stream-signaling",
+  "version": "1.0.0",
+  "description": "Simple signaling server for the vedio-stream demo",
+  "main": "signaling-server.js",
+  "scripts": {
+    "start": "node signaling-server.js"
+  },
+  "dependencies": {
+    "ws": "^8.13.0"
+  }
+}

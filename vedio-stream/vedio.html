@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>online vedio</title>
+    <!-- Inline tiny transparent favicon to avoid browser requesting /favicon.ico and causing 404 -->
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==">
+    <link rel="stylesheet" href="vedio.css">
+</head>
+<body>
+    <div id="controls">
+        <label for="roomName">Room:</label>
+        <input id="roomName" placeholder="room name" value="main" />
+        <label for="roleSelect">Role:</label>
+        <select id="roleSelect">
+            <option value="viewer">Viewer</option>
+            <option value="streamer">Streamer</option>
+        </select>
+        <button id="joinBtn">Join Room</button>
+        <button id="leaveBtn" disabled>Leave</button>
+
+        <button id="startStreamBtn">Start Stream</button>
+        <button id="stopStreamBtn" disabled>Stop Stream</button>
+
+        <button id="toggleCamBtn" disabled>Toggle Camera</button>
+        <button id="toggleMicBtn" disabled>Toggle Mic</button>
+
+        <span id="status" aria-live="polite"></span>
+    </div>
+
+    <div id="videos">
+        <video class="video-player" id="player" autoplay playsinline></video>
+    </div>
+    <!-- Load Agora-chat shim (or replace with real Agora SDK) -->
+        <!-- Guard: prevent attaching `unload` listeners which some SDKs try to register.
+                 Modern browsers may refuse 'unload' in some contexts and log a Permissions
+                 Policy warning; blocking those listeners avoids the noisy console message.
+                 This is a minimal, local workaround. If you use the real Agora SDK in
+                 production consider updating it or using `pagehide`/`beforeunload`.
+        -->
+        <script>
+        (function(){
+            try{
+                const orig = EventTarget.prototype.addEventListener;
+                EventTarget.prototype.addEventListener = function(type, listener, options){
+                    // only block top-level unload listeners to avoid breaking other code
+                    if (type === 'unload' && (this === window || this === window.window)){
+                        console.debug('Blocked attempt to add unload listener (Permissions Policy)');
+                        return;
+                    }
+                    return orig.call(this, type, listener, options);
+                };
+            }catch(e){
+                // if anything goes wrong, don't break the page
+                console.warn('Unload-guard setup failed', e);
+            }
+        })();
+        </script>
+        <script src="Agora-chat.js"></script>
+    <script src="vedio.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Yafet Lottery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+    <div class="live-card">
+        <h1>🔴 Live</h1>
+        <div class="live-hero">
+            <div class="typewriter" aria-live="polite">
+                <span id="typeText" aria-hidden="true"></span>
+                <span class="cursor" aria-hidden="true"></span>
+            </div>
+            <div class="live-subtitle">The draw will begin shortly. Stay tuned — you'll be redirected automatically.</div>
+            <button id="backBtn" type="button" style="margin-top:8px;max-width:160px;">Back</button>
+        </div>
+
+        <!-- LIVE AREA: simplified (guests and draw removed) -->
+        <div class="live-area">
+            <div class="live-controls">
+                <div style="padding:18px;color:#c8ffd6;text-align:center;">Live session — no participants or draw on this view.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+// Looping type-and-delete effect for the live page
+(function(){
+    const MESSAGES = ['Coming soon...', 'Drawing now', 'Good luck!'];
+    const el = document.getElementById('typeText');
+    if (!el) return;
+    const cursor = document.querySelector('.typewriter .cursor');
+
+    // Tuned speeds / pauses (adjust as needed)
+    const TYPE_SPEED = 80; // ms per character typing
+    const DELETE_SPEED = 50; // ms per character deleting
+    const WAIT_AFTER_TYPING = 800; // ms pause after typing full
+    const WAIT_AFTER_DELETING = 400; // ms pause after deleting
+
+    function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function typeText(text){
+        for(let i=1;i<=text.length;i++){
+            el.textContent = text.slice(0,i);
+            await wait(TYPE_SPEED);
+        }
+    }
+
+    async function deleteText(text){
+        for(let i=text.length;i>=0;i--){
+            el.textContent = text.slice(0,i);
+            await wait(DELETE_SPEED);
+        }
+    }
+
+    async function loop(){
+        let idx = 0;
+        while(true){
+            const msg = MESSAGES[idx % MESSAGES.length];
+            await typeText(msg);
+            await wait(WAIT_AFTER_TYPING);
+            await deleteText(msg);
+            await wait(WAIT_AFTER_DELETING);
+            idx++;
+        }
+    }
+
+    if (cursor) cursor.style.display = 'inline-block';
+    loop();
+})();
+
+// ensure Back button reliably navigates
+try {
+    const b = document.getElementById('backBtn');
+    if (b) b.addEventListener('click', () => { window.location.href = 'index.html'; });
+} catch(e){}
+
+// participants/draw/chat have been removed from this page by request
+(function(){
+    // intentionally left blank
+})();
+</script>
+</html>

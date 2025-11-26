@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-lights">
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="moving-object"></span>
+</div>
+
+<div class="card">
+    <h1 id="adminHeader" style="display:none;">⚙️ Admin Panel</h1>
+
+    <div id="adminContent" style="display:none;">
+    <div class="section-title">Create New Round</div>
+    <div class="input-group">
+        <input id="roundName" placeholder=" ">
+        <label for="roundName">Round Name (optional)</label>
+    </div>
+    <div class="input-group">
+        <input id="ticketPrice" type="number" placeholder=" ">
+        <label for="ticketPrice">Ticket Price (birr)</label>
+    </div>
+    <button onclick="createRound()">Create Lottery Round</button>
+
+    <hr>
+
+    <div class="section-title">Control Lottery</div>
+    <button onclick="startLottery()">Start Lottery</button>
+    <button onclick="stopLottery()">Stop Lottery</button>
+
+    <hr>
+
+    <div class="section-title">Schedule Live Time</div>
+    <div class="input-group">
+        <input id="countdownAt" type="datetime-local" placeholder=" ">
+        <label for="countdownAt">Set Live Time (local)</label>
+    </div>
+    <button onclick="setCountdown()">Set Live Time</button>
+    <button onclick="clearCountdown()">Clear Live Time</button>
+    <p id="countdownInfo"></p>
+
+    <div style="margin-bottom:8px;">
+        <button onclick="location.href='vedio-stream/streamer.html'" style="background:#072; color:#dfffe9; padding:8px 12px; border-radius:8px; border:none; font-weight:800;">Go to Streamer ▶</button>
+    </div>
+    <div class="section-title">Declare Winner</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <div class="input-group" style="flex:1;min-width:90px;">
+            <input id="winningNumber1" type="number" min="0" max="99" placeholder=" " />
+            <label for="winningNumber1">1. winner</label>
+        </div>
+        <div class="input-group" style="flex:1;min-width:90px;">
+            <input id="winningNumber2" type="number" min="0" max="99" placeholder=" " />
+            <label for="winningNumber2">2. winner</label>
+        </div>
+        <div class="input-group" style="flex:1;min-width:90px;">
+            <input id="winningNumber3" type="number" min="0" max="99" placeholder=" " />
+            <label for="winningNumber3">3. winner</label>
+        </div>
+    </div>
+    <button onclick="setWinningNumber()">Submit Winning Numbers</button>
+    <p id="winnerText"></p>
+
+    <hr>
+
+    <div class="section-title">Buyers</div>
+    <button onclick="viewBuyers()">Show Buyers</button>
+    <pre id="buyerList"></pre>
+
+    <hr>
+
+    <div class="section-title">Rounds</div>
+    <button onclick="viewRounds()">Load Rounds</button>
+    <div id="roundsList" style="margin-top:12px;white-space:normal;"></div>
+
+    <div class="section-title">Winners</div>
+    <button onclick="viewWinners()">Show Winners</button>
+    <pre id="winnerList"></pre>
+
+    </div> <!-- /adminContent -->
+
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>

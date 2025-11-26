@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rounds Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-lights"></div>
+<div class="card">
+    <h1>🗂 Rounds & Tickets</h1>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+        <button id="refreshRounds">Reload Rounds</button>
+        <button id="backAdmin">Back to Admin</button>
+    </div>
+
+    <div id="roundsGrid" class="rounds-grid"></div>
+        <div id="ticketsContainer" style="margin-top:24px;"></div>
+
+        <!-- Modal for large image preview -->
+        <div id="imageModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
+            <img id="modalImg" src="" style="max-width:500px;max-height:500px;border-radius:18px;box-shadow:0 8px 40px #000;display:block;margin:auto;" />
+        </div>
+</div>
+
+<style>
+.rounds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto 24px auto;
+}
+.round-square {
+    background: #10181f;
+    border: 2.5px solid #00ff6633;
+    border-radius: 18px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #00ffcc;
+    box-shadow: 0 4px 24px #0006;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    position: relative;
+}
+.round-square:hover {
+    border-color: #00ffcc;
+    background: #18222b;
+    box-shadow: 0 6px 32px #00ff6633;
+}
+.ticket-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.5fr 1.5fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+    background: #0f1316;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    padding: 10px 0;
+}
+.ticket-header {
+    font-weight: 700;
+    color: #ffd700;
+    background: #181f2a;
+    border-radius: 10px 10px 0 0;
+    padding: 8px 0;
+}
+.ticket-img {
+    max-width: 110px;
+    max-height: 90px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ffd70055;
+    background: #222;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+.ticket-actions button {
+    margin: 2px 0;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+}
+.ticket-actions .validate {
+    background: #00cc66;
+    color: #000;
+}
+.ticket-actions .reject {
+    background: #ff6666;
+    color: #000;
+}
+</style>
+<script type="module" src="rounds.js"></script>
+<script>
+// Modal logic for image preview
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImg');
+document.addEventListener('click', function(e) {
+    if (e.target.classList && e.target.classList.contains('ticket-img')) {
+        modalImg.src = e.target.src;
+        modal.style.display = 'flex';
+    } else if (e.target === modal) {
+        modal.style.display = 'none';
+        modalImg.src = '';
+    }
+});
+</script>
+</body>
+</html>

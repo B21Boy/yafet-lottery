@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Streamer - Live Video</title>
+  <style>
+    body { background: linear-gradient(180deg,#071020,#0f1726); color: #e6f4f7; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+    .container { max-width: 760px; margin: 36px auto; background: linear-gradient(180deg,#08121a,#0b1822); border-radius: 14px; padding: 22px; box-shadow: 0 10px 36px rgba(2,8,23,0.7); }
+    video { width: 100%; max-width: 720px; border-radius: 12px; background: #000; box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
+    #chat { margin-top: 18px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: 12px; padding: 14px; min-height: 120px; max-height: 320px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.03); }
+    #msgInput { width: 72%; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); color: #e6f4f7; }
+    #sendBtn { padding: 10px 18px; border-radius: 10px; border: none; background: linear-gradient(90deg,#00ffd5,#00bfa8); color: #072023; font-weight: 800; cursor: not-allowed; }
+    .chat-msg { display:flex; flex-direction:column; gap:6px; margin:8px 0; padding:10px; border-radius:10px; background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(255,255,255,0.02); }
+    .chat-header { display:flex; justify-content:space-between; align-items:center; }
+    .chat-name { font-weight:800; color:#7fffe0; font-size:13px; }
+    .chat-time { font-size:12px; color:#9fb8c8; }
+    .chat-text { color:#e6eef8; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎥 Streamer Live</h2>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+      <button onclick="location.href='../admin.html'" style="background:#333;color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;">← Back to Admin</button>
+    </div>
+    <video id="streamerVideo" autoplay muted playsinline></video>
+    <div style="display:flex;gap:8px;margin-top:12px;align-items:center;">
+      <button id="startRecord" style="background:#ff0044;color:#fff;padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;">Start Recording</button>
+      <button id="stopRecord" style="background:#444;color:#fff;padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;" disabled>Stop Recording</button>
+      <span id="recStatus" style="margin-left:12px;color:#ffd700;font-weight:700;">Not recording</span>
+    </div>
+    <!-- chat removed for streamer (receive-only removed) -->
+    <hr style="margin:18px 0;border-color:rgba(255,255,255,0.03)" />
+    <h3 style="color:#ffd670;margin-top:6px">Recordings</h3>
+    <div id="recordingsFeed" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px;"></div>
+  </div>
+  <script src="streamer.js" type="module"></script>
+</body>
+</html>

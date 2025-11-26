@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yafet Lottery</title>
+  <style>
+    body { background: #0f1720; color: #e6eef8; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+    .container { max-width: 760px; margin: 36px auto; background: linear-gradient(180deg,#0b1220,#0f1726); border-radius: 14px; padding: 20px; box-shadow: 0 8px 40px rgba(2,6,23,0.7); }
+    video { width: 100%; max-width: 720px; border-radius: 12px; background: #000; box-shadow: 0 6px 24px rgba(0,0,0,0.6); }
+    #chat { display:none; }
+    #msgInput { width: calc(100% - 110px); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: #e6eef8; }
+    #sendBtn { padding: 10px 16px; border-radius: 12px; border: none; background: linear-gradient(90deg,#00ffd5,#00bfa8); color: #072023; font-weight: 800; cursor: pointer; box-shadow: 0 6px 18px rgba(0,191,168,0.12); }
+    .rec-card { background: linear-gradient(180deg,#071018,#0b1720); border-radius: 12px; padding: 12px; display:flex; gap:12px; align-items:center; border:1px solid rgba(255,255,255,0.03); }
+    .rec-meta { color:#9fb8c8; font-size:13px; }
+    .rec-messages { margin-top:8px; font-size:13px; color:#d9eef8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="display:flex;align-items:center;gap:12px;">👀 Viewer Live</h2>
+    <div id="liveStatus" style="margin:10px 0;padding:14px 16px;border-radius:12px;background:linear-gradient(90deg,#07120b,#02321a);color:#b7ffd9;font-weight:800;border:1px solid rgba(0,255,160,0.12);display:block;">
+      <div style="font-size:18px;color:#a9ffd6;">LIVE</div>
+      <div style="margin-top:6px;color:#dfffe9;font-weight:700;">Live streaming is coming soon — stay tuned!</div>
+    </div>
+    <video id="viewerVideo" autoplay playsinline></video>
+  <hr />
+    <h3 style="margin-top:12px;color:#00ff66;">Recent Recordings</h3>
+    <div id="recordingsFeed" style="display:flex;flex-direction:column;gap:14px;margin-top:12px;"></div>
+    <!-- Chat controls removed for viewer (send disabled) -->
+  </div>
+  <script src="viewer.js" type="module"></script>
+</body>
+</html>
